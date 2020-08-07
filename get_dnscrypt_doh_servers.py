@@ -63,6 +63,9 @@ def main():
     ipv6 = set()
 
     for item in data:
+        if item['proto'] != 'DoH':
+            logger.debug('Rejecting entry not offering DoH: {}'.format(item))
+            continue
         if item.get('addrs'):
             for a in item['addrs']:
                 a = re.sub('[\[\]]', '', a)
